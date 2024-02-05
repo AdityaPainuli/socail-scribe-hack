@@ -5,8 +5,11 @@ import React, { useEffect, useState } from 'react'
 const CreateSuggestion = () => {
     const { session } = useSession();
     const [postSuggestions, setPostSuggestions] = useState<any[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
+        if (loading) return;
+        setLoading(true);
         const generatePost = async () => {
             await fetch('/api/generateSuggestion', {
                 method: "POST",
@@ -18,6 +21,7 @@ const CreateSuggestion = () => {
                 const { content } = await data.json();
                 setPostSuggestions(content);
                 console.log(content)
+                setLoading(false)
             })
         }
         generatePost();
