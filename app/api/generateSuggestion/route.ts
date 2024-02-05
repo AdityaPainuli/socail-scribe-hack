@@ -52,7 +52,7 @@ export async function POST(req: Request, res: Response) {
         role: "system",
         content: `
           Generate new LinkedIn post suggestions based on your past data. Provide the topic and details of your previous posts, including target audience, tone, and keywords. Our AI will analyze your data to generate 2-3 max tailored suggestions to help you create engaging content for your audience
-          past data = ${data}
+          past data = ${JSON.stringify(data)}
 
 
           give the result in the format of -
