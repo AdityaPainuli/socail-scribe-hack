@@ -10,21 +10,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id         String   @default(cuid())
-  username   String
-  email      String   @unique
-  created_at DateTime @default(now())
-  post       Post[]
-}
-
-model Post {
+model LinkedinPost {
   id         String   @id @default(cuid())
   title      String
   created_at DateTime @default(now())
   postData   Json?
   userId     String
   postResult String?
-  User       User?    @relation(fields: [userEmail], references: [email])
-  userEmail  String?
 }

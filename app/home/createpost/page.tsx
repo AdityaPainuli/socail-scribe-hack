@@ -13,7 +13,9 @@ import {
 import { Input } from '@/components/ui/input';
 import Image from 'next/image';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Loader } from 'lucide-react';
+import { CopyIcon, Loader } from 'lucide-react';
+import { getAuth } from '@clerk/nextjs/server';
+import { useSession } from '@clerk/nextjs';
 
 const CreatePost = () => {
     const [topic, setTopic] = useState<string>("");
@@ -22,6 +24,7 @@ const CreatePost = () => {
     const [keywords, setKeywords] = useState<string>("");
     const [content, setContent] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
+    const { session } = useSession();
 
 
     const handleClick = async () => {
@@ -43,8 +46,25 @@ const CreatePost = () => {
             setLoading(false);
             setContent(content);
 
-        })
+        });
 
+
+    }
+
+    const saveContent = async (topic: string, targetAudience: string, tone: string, keyword: string, results: string) => {
+        if (topic === "" || targetAudience === "" || tone === "" || keyword === "" || results === "") return
+        const req = await fetch('/api/savePost', {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({ results, topic, targetAudience, tone, keyword, userId: session?.user.id })
+        }).then((data) => {
+            alert("Data is saved..")
+        }).catch((e) => {
+            alert("Data is not saved");
+            console.log(e);
+        })
     }
     return (
         <div className='max-w-[80%] flex  space-x-4 p-4  min-h-[500px] mt-[2rem]  m-auto  rounded-md bg-gray-100 '>
@@ -58,7 +78,7 @@ const CreatePost = () => {
                 </div>
                 <div className='min-w-full flex flex-col space-y-4 my-[1rem]'>
                     <h1 className='text-gray-600 font-semibold '>What is your target audience ?  <span className='text-red-500'>*</span></h1>
-                    <input className='rounded-md bg-white p-2 outline-none' value={targetAudience} onChange={(e) => setTargetAudience(e.target.value)} placeholder='tech,bca,education' />
+                    <input className='rounded-md bg-white p-2 outline-none' value={targetAudience} onChange={(e) => setTargetAudience(e.target.value)} placeholder='People who are doing bca or currently bca ' />
                 </div>
                 <div className='min-w-full flex flex-col space-y-4 my-[1rem]'>
                     <h1 className='text-gray-600 font-semibold '>Keywords  <span className='text-red-500'>*</span></h1>
@@ -75,10 +95,13 @@ const CreatePost = () => {
                 </div>
             </div>
             {content ? (
-                <div className='flex  bg-white max-h-[500px]  rounded-md flex-col space-y-4 w-full  min-h-full items-center'>
+                <div className='flex relative  bg-white max-h-[500px]  rounded-md flex-col space-y-4 w-full  min-h-full items-center'>
                     <ScrollArea>
                         <h1 className='font-semibold text-sm px-3 py-2 whitespace-pre-wrap' >{content ? content : "No content yet"}</h1>
                     </ScrollArea>
+                    <div className='w-full px-4  flex  justify-end absolute bottom-5 '>
+                        <Button onClick={() => saveContent(topic, targetAudience, tone, keywords, content)} className='flex space-x-4 items-center'><CopyIcon className='w-4 h-4' /><span>Copy</span></Button>
+                    </div>
                 </div>
             ) : (
                 <div className='flex justify-center bg-white max-h-[500px]  rounded-md flex-col space-y-4 w-full  min-h-full items-center'>

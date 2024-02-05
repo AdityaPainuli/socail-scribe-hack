@@ -23,6 +23,11 @@ export async function POST(req: Request, res: Response) {
       },
     ],
     model: "gpt-4",
+    temperature: 1,
+    max_tokens: 256,
+    top_p: 1,
+    frequency_penalty: 0,
+    presence_penalty: 0,
   });
   return NextResponse.json({ content: completion.choices[0].message.content });
 }
