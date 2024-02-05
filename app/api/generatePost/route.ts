@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
+export const config = {
+  runtime: "edge",
+};
+
 export async function POST(req: Request, res: Response) {
   const { topic, keywords, tone, targetAudience } = await req.json();
   const openai = new OpenAI({
@@ -24,10 +28,18 @@ export async function POST(req: Request, res: Response) {
     ],
     model: "gpt-4",
     temperature: 1,
-    max_tokens: 256,
+    max_tokens: 512,
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
   });
-  return NextResponse.json({ content: completion.choices[0].message.content });
+  return NextResponse.json(
+    { content: completion.choices[0].message.content },
+    {
+      status: 200,
+      headers: {
+        "content-type": "application/json",
+      },
+    }
+  );
 }

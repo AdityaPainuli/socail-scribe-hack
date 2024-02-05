@@ -1,0 +1,7 @@
+{
+    "functions": {
+      "api/generatePost.ts": {
+        "maxDuration": 60
+      }
+    }
+  }
