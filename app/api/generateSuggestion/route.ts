@@ -68,7 +68,7 @@ content:"string"
       `,
       },
     ],
-    model: "gpt-4",
+    model: "gpt-3.5-turbo",
     temperature: 1,
     max_tokens: 256,
     top_p: 1,
