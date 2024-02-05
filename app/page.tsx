@@ -122,7 +122,7 @@ export default function Home() {
               </span>
               <span className='mt-2 text-zinc-700'>
 
-                "Enter your topic, audience, keywords, and preferred tone; our AI engine crafts a customized LinkedIn post for you to review and publish."
+                &quot;Enter your topic, audience, keywords, and preferred tone; our AI engine crafts a customized LinkedIn post for you to review and publish.&quot;
 
 
 
@@ -139,7 +139,7 @@ export default function Home() {
                 Share Your LinkedIn Post
               </span>
               <span className='mt-2 text-zinc-700'>
-                After reviewing and refining your AI-generated LinkedIn post,simply click to 'copy' to directly copy to your clipboard and post it in your linkden
+                After reviewing and refining your AI-generated LinkedIn post,simply click to &apos;copy&apos; to directly copy to your clipboard and post it in your linkden
               </span>
             </div>
           </li>

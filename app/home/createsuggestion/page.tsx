@@ -2,7 +2,7 @@
 import { useSession } from '@clerk/nextjs'
 import React, { useEffect, useState } from 'react'
 
-const createsuggestion = () => {
+const CreateSuggestion = () => {
     const { session } = useSession();
     const [postSuggestions, setPostSuggestions] = useState<any[]>([]);
 
@@ -40,4 +40,4 @@ const createsuggestion = () => {
     )
 }
 
-export default createsuggestion
+export default CreateSuggestion;

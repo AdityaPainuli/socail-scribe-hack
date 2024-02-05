@@ -6,7 +6,7 @@ import { PlusIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
-const homePage = () => {
+const HomePage = () => {
     const { session } = useSession();
     const router = useRouter();
 
@@ -41,4 +41,4 @@ const homePage = () => {
     )
 }
 
-export default homePage
+export default HomePage;

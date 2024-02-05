@@ -51,7 +51,7 @@ const CreateCaption = () => {
                         return (
                             <div key={index} className='bg-gray-100 min-h-[150px] my-6 flex flex-col space-y-2 p-2 justify-center items-center rounded-md shadow-md'>
 
-                                <p className=' text-gray-600'>"{conn?.caption}"</p>
+                                <p className=' text-gray-600'>&quot;{conn?.caption}&quot;</p>
                             </div>
                         )
                     })
