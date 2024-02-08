@@ -1,10 +1,6 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
-export const config = {
-  runtime: "edge",
-};
-
 export async function POST(req: Request, res: Response) {
   const { topic, keywords, tone, targetAudience } = await req.json();
   const openai = new OpenAI({

@@ -4,6 +4,8 @@ import './globals.css'
 import { cn } from '../lib/utils'
 import Navbar from '@/components/navbar'
 import { ClerkProvider } from '@clerk/nextjs'
+import Providers from '@/components/providers'
+import "react-loading-skeleton/dist/skeleton.css"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,13 +20,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider>
+
+    <Providers>
       <html lang="en" className='light'>
         <body className={cn(inter.className, 'min-h-screen font-sans antialiased grainy ')}>
           <Navbar />
           {children}
         </body>
       </html>
-    </ClerkProvider>
+    </Providers>
+
   )
 }
