@@ -24,6 +24,7 @@ export default function RootLayout({
     <Providers>
       <html lang="en" className='light'>
         <body className={cn(inter.className, 'min-h-screen font-sans antialiased grainy ')}>
+          {/* <Toaster /> */}
           <Navbar />
           {children}
         </body>
